@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafizur Rahman | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --gray-light: #cbd5e1;
+            --success: #10b981;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .logo i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-img {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid white;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            line-height: 1.1;
+        }
+
+        .hero-text h1 span {
+            color: var(--primary);
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--gray);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+            animation: pulse 2s infinite;
+        }
+
+        .availability-badge i {
+            margin-right: 8px;
+        }
+
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .about-image img:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Skills Section */
+        .skills {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            z-index: -1;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .skill-category h3 {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-category h3 i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            color: var(--gray);
+        }
+
+        .skill-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            animation-delay: 0.2s;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            animation-delay: 0.4s;
+        }
+
+        .timeline-content {
+            padding: 25px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .timeline-content::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 0 4px var(--primary);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            left: -10px;
+        }
+
+        .timeline-content h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .timeline-content .date {
+            color: var(--gray);
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+            background: var(--light);
+            padding: 5px 15px;
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .timeline-content ul {
+            padding-left: 20px;
+            margin-top: 15px;
+        }
+
+        .timeline-content ul li {
+            margin-bottom: 8px;
+            color: var(--gray);
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--primary);
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 0 4px white;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: -10px;
+            background-color: var(--primary);
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 0 4px white;
+        }
+
+        /* Education Section */
+        .education-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-card {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .education-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .education-card h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .education-card .institution {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .education-card .date {
+            color: var(--gray);
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 500;
+        }
+
+        .education-card .gpa {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 600;
+            margin-top: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Volunteer Section */
+        .volunteer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .volunteer-card {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .volunteer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--success), #059669);
+        }
+
+        .volunteer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .volunteer-card h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .volunteer-card .organization {
+            color: var(--success);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .volunteer-card .date {
+            color: var(--gray);
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 500;
+        }
+
+        /* Image Slider Section */
+        .slider-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 80px 0;
+        }
+
+        .slider-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 500px;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 30px;
+        }
+
+        .slide-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .slider-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+
+        .slider-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gray-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Reference Section */
+        .reference-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .reference-card {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .reference-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .reference-card .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            overflow: hidden;
+        }
+
+        .reference-card .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reference-card h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .reference-card .position {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .reference-card .contact {
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-info {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h3 {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            flex-shrink: 0; /* Fix for responsive email icon */
+        }
+
+        .contact-details h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .contact-details p {
+            color: var(--gray);
+        }
+
+        /* Map Section */
+        .map-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 80px 0;
+        }
+
+        .map-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .map-wrapper {
+            width: 100%;
+            height: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(0.2) contrast(1.1) saturate(1.2);
+        }
+
+        .map-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 300px;
+        }
+
+        .map-overlay h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .map-overlay p {
+            color: var(--gray);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .map-overlay p i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark), #0f172a);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 10px;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Link Styles */
+        a.company-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border-bottom: 1px dotted var(--primary);
+        }
+
+        a.company-link:hover {
+            color: var(--secondary);
+            border-bottom: 1px solid var(--secondary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+                left: 21px;
+            }
+            
+            .timeline-content::after {
+                left: -10px;
+            }
+
+            .slider {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 1rem;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+                position: absolute;
+                top: 1.2rem;
+                right: 1rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+
+            /* Fix for contact items on mobile */
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-item i {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            /* Map responsive styles */
+            .map-wrapper {
+                height: 350px;
+            }
+
+            .map-overlay {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                max-width: 100%;
+                margin-top: 20px;
+            }
+
+            .slider {
+                height: 350px;
+            }
+
+            .slide-content {
+                padding: 20px;
+            }
+
+            .slide-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .slider-btn {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .profile-img {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .skill-category, .education-card, .volunteer-card, .reference-card {
+                padding: 1.5rem;
+            }
+
+            .map-wrapper {
+                height: 300px;
+            }
+
+            .slider {
+                height: 300px;
+            }
+
+            .slide-content {
+                padding: 15px;
+            }
+
+            .slide-content h3 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo"><i class="fas fa-code"></i>Hafizur<span>Rahman</span></a>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#volunteer">Volunteer</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#reference">Reference</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#location">Location</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-image">
+                <img src="https://scontent.fadl5-1.fna.fbcdn.net/v/t39.30808-6/549560612_2118659931994124_7551418301246306033_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=--TIIPoB6SgQ7kNvwH76s7_&_nc_oc=AdlGEDcvkEvSbreX9P0J-eU14cgWqqFrC_9g8zqDq1TfXq9PrWG-igri6alnu6jaIk_A2Q-zhdSNdYqM88hgjs9k&_nc_zt=23&_nc_ht=scontent.fadl5-1.fna&_nc_gid=Y85h8hU3FPTsPo_bRdR5Gg&oh=00_AfgABSnGYnk_xtq-dUfSW-XRsqgo3CEigf0v_zafpZfcmw&oe=691790C4" alt="Hafizur Rahman" class="profile-img">
+            </div>
+            <div class="hero-text">
+                <h1>Hello, I'm <span>Hafizur Rahman</span></h1>
+                <p>Customer Service | Facility Maintenance</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="#experience" class="btn btn-outline">View My Work</a>
+                </div>
+                <div class="availability-badge">
+                    <i class="fas fa-bolt"></i>
+                    Available for Part-Time/Casual Work
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Motivated and dependable professional</h3>
+                    <p>I am a motivated and dependable customer service professional with proven experience across retail, car rental, and facility maintenance industries. Recognized for a strong work ethic, positive attitude, and consistent reliability in fast-paced team environments.</p>
+                    <p>I hold a valid International Driver License and all essential Australian workplace certifications. Currently pursuing a Master of Engineering at Charles Darwin University while seeking part-time/casual employment opportunities.</p>
+                    <p>I am free 24/7 to work full time and can start immediately. I have the right to work PART-TIME/CASUAL position. I also have my own car, so I can easily travel to work or do any job that needs me to drive.</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="contact-details">
+                                <h4>Address</h4>
+                                <p>16 Rossiter Street, Rapid Creek, NT 0810</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div class="contact-details">
+                                <h4>Phone</h4>
+                                <p>+61466985484</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>hafizur.rahman@students.cdu.edu.au</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://media.licdn.com/dms/image/v2/D562DAQHQGn1pLdoU4Q/profile-treasury-image-shrink_8192_8192/B56Zpt7gplIYAg-/0/1762780909047?e=1763388000&v=beta&t=MwI-rRXxKYnXVRteKwTMQ49Xp1hjKM8h3ZIRU2S_qhE" alt="Professional Work">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Skills & Certifications</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-tools"></i> Technical Skills</h3>
+                    <ul class="skill-list">
+                        <li>Electrical & mechanical maintenance</li>
+                        <li>Programming & Website Design</li>
+                        <li>Solar equipment maintenance</li>
+                        <li>Facility maintenance</li>
+                    </ul>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-users"></i> Customer Service</h3>
+                    <ul class="skill-list">
+                        <li>Customer assistance & support</li>
+                        <li>Stock replenishment & organization</li>
+                        <li>Teamwork & collaboration</li>
+                        <li>Cleaning & maintenance duties</li>
+                    </ul>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-award"></i> Certifications</h3>
+                    <ul class="skill-list">
+                        <li>Responsible Service of Alcohol (RSA)</li>
+                        <li>Food Safety Certificate (2025)</li>
+                        <li>International Driver License</li>
+                        <li>IELTS Overall Band Score: 7.0</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Work Experience</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Customer Service, Facility Maintenance</h3>
+                        <span class="date">Jan 2024 – Oct 2025 | Full Time</span>
+                        <p><a href="https://www.goldensolarbd.com/" target="_blank" class="company-link">Golden Solar BD</a></p>
+                        <ul>
+                            <li>Assisted customers with product selection</li>
+                            <li>Maintenance of solar equipment</li>
+                            <li>Supported warehouse organization</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Team Member</h3>
+                        <span class="date">Apr 2022 – Dec 2023 | Part Time</span>
+                        <p><a href="https://www.united.com.bd/our-concerns/unimart-ltd/" target="_blank" class="company-link">Unimart, Sylhet, Bangladesh</a></p>
+                        <ul>
+                            <li>Refill and organize stock across store sections</li>
+                            <li>Maintain clean and orderly aisles</li>
+                            <li>Support team members to achieve daily store presentation and safety standards</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Team Member</h3>
+                        <span class="date">Jan 2019 – Jul 2021 | Part Time</span>
+                        <p><a href="https://sylhetcarneeds.com/" target="_blank" class="company-link">Sylhet Car Needs, Sylhet</a></p>
+                        <ul>
+                            <li>Prepared vehicles for re-use</li>
+                            <li>Delivered vehicles to customers or branches</li>
+                            <li>Assisted operations team with vehicle checks and general duties</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Cleaning Attendant</h3>
+                        <span class="date">Nov 2018 – Apr 2021 | Part Time</span>
+                        <p><a href="https://www.facebook.com/buffetparadiserestaurantandpartycentre/" target="_blank" class="company-link">Buffet Paradise Restaurant & Party Center, Sylhet</a></p>
+                        <ul>
+                            <li>Greeted customers and maintained clean facilities</li>
+                            <li>Collected plates and cleaned tables</li>
+                            <li>Ensured site hygiene standards</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education">
+        <div class="container">
+            <div class="section-title">
+                <h2>Education</h2>
+            </div>
+            <div class="education-container">
+                <div class="education-card fade-in">
+                    <h3>Master of Engineering (Electrical and Electronics)</h3>
+                    <span class="institution"><a href="https://www.cdu.edu.au/" target="_blank" class="company-link">Charles Darwin University (CDU), Darwin, Australia</a></span>
+                    <span class="date">Expected Completion: 2027</span>
+                    <p>Currently pursuing advanced studies in electrical and electronics engineering with a focus on practical applications and industry-relevant skills.</p>
+                </div>
+                <div class="education-card fade-in">
+                    <h3>Bachelor of Science in Electrical and Electronic Engineering (EEE)</h3>
+                    <span class="institution"><a href="https://www.sust.edu/" target="_blank" class="company-link">Shahjalal University of Science and Technology (SUST)</a></span>
+                    <span class="date">Graduated: 2024</span>
+                    <p>Graduated with distinction, achieving a CGPA of 3.94/4.00 and ranking top of the department.</p>
+                    <span class="gpa">CGPA: 3.94 / 4.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Section -->
+    <section id="volunteer" class="volunteer">
+        <div class="container">
+            <div class="section-title">
+                <h2>Volunteer Experience</h2>
+            </div>
+            <div class="volunteer-container">
+                <div class="volunteer-card fade-in">
+                    <h3>Member</h3>
+                    <span class="organization"><a href="https://vbd.com.bd/" target="_blank" class="company-link">Volunteer for Bangladesh</a></span>
+                    <span class="date">Sep 2024 - Nov 2025</span>
+                    <p>Participated in social service activities and completed My Voice My Choice youth engagement training. Supported community events and initiatives.</p>
+                </div>
+                <div class="volunteer-card fade-in">
+                    <h3>Fundraising Consultant</h3>
+                    <span class="organization">Seba Foundation, Bangladesh</span>
+                    <span class="date">Jan 2016 - Oct 2025</span>
+                    <p>Volunteered for flood relief and assisted in aid distribution. Contributed to fundraising efforts for community support programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Slider Section -->
+    <section id="gallery" class="slider-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Professional Gallery</h2>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slide">
+                        <img src="https://media.licdn.com/dms/image/v2/D562DAQGtl9uLA3TFUA/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1725803852164?e=1763388000&v=beta&t=dn4QF1UhWOVd0MGO5lWqli6TJKW1YxaE4MVjBGzmWK4" alt="Industrial Technology on Electrical Engineering & Instrumentation">
+                        <div class="slide-content">
+                            <h3>Industrial Technology on Electrical Engineering & Instrumentation</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://media.licdn.com/dms/image/v2/D562DAQFWVXSc7Pgi-w/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1725709104591?e=1763388000&v=beta&t=hdufIJ7Gaxhfw-CsIiaHXQD7e2cQm3QTLJ38_G_V7g0" alt="Industrial Technology on Electrical Engineering & Instrumentation">
+                        <div class="slide-content">
+                            <h3>Industrial Technology on Electrical Engineering & Instrumentation</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://media.licdn.com/dms/image/v2/D562DAQEEWjWZVLVeiQ/profile-treasury-image-shrink_800_800/B56Zpt795iKAAY-/0/1762781029086?e=1763388000&v=beta&t=hKBNdt_cDOvdSH-PxRAptRNekmFAD17qjb7ax5XA_EM" alt="Solar panels Inspection">
+                        <div class="slide-content">
+                            <h3>Solar Panels Inspection</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://media.licdn.com/dms/image/v2/D562DAQHKEuOjFnBBmg/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1725958395568?e=1763388000&v=beta&t=RHRSiYCGDBDQXzulam8z0WjsKhUuIroSb6NZ2uYA-oM" alt="University Farewell">
+                        <div class="slide-content">
+                            <h3>University Farewell</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://media.licdn.com/dms/image/v2/D562DAQEAtnx8_3E9wQ/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1725958047474?e=1763388000&v=beta&t=n54q7bNTaityCqJ6w7_4pDX6tzz3M_tKw-GyAUaYVqY" alt="Industrial Tour">
+                        <div class="slide-content">
+                            <h3>Industrial Tour</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://media.licdn.com/dms/image/v2/D562DAQGSKayRu0kgHg/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1725958005910?e=1763388000&v=beta&t=7YMeWM9gk0OYPuui3HJumiDy7B3UfLYVnAlSSefNqvo" alt="SEC EEE Fest">
+                        <div class="slide-content">
+                            <h3>SEC EEE Fest</h3>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="https://media.licdn.com/dms/image/v2/D562DAQFJ2DcxlbcL9g/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1725731766101?e=1763388000&v=beta&t=Kk_PMsxiqBYpXgbrHar8liiDODeonGror2ywSxXNKQc" alt="EEE family">
+                        <div class="slide-content">
+                            <h3>EEE Family</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-nav">
+                    <button class="slider-btn prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-btn next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="slider-dots">
+                    <!-- Dots will be generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reference Section -->
+    <section id="reference" class="reference">
+        <div class="container">
+            <div class="section-title">
+                <h2>Reference</h2>
+            </div>
+            <div class="reference-container">
+                <div class="reference-card fade-in">
+                    <div class="avatar">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQH4JRwGtqjQ8Q/profile-displayphoto-shrink_800_800/B56ZOcSbIMGoAw-/0/1733493896723?e=1764201600&v=beta&t=bWiqYpg_oTAAUtyaR0aAK1l0ZVlW__pnKeMVvL3zX_w" alt="Sifat Khan">
+                    </div>
+                    <h3>Sifat Khan</h3>
+                    <span class="position">Teacher, Palmerston College</span>
+                    <p class="contact">Phone: +61420856291</p>
+                    <p class="contact">Email: Sifat.khan@education.nt.gov.au</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Me</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info fade-in">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-details">
+                            <h4>Address</h4>
+                            <p>16 Rossiter Street, Rapid Creek, NT 0810</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>+61466985484</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>hafizur.rahman@students.cdu.edu.au</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-info fade-in">
+                    <h3>Professional Summary</h3>
+                    <p>Motivated and dependable customer service professional with proven experience across retail, car rental, and facility maintenance industries. Recognized for a strong work ethic, positive attitude, and consistent reliability in fast-paced team environments.</p>
+                    <p>Holds a valid International Driver License and all essential Australian workplace certifications.</p>
+                    <a href="#contact" class="btn btn-primary" style="margin-top: 20px;">Contact Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="location" class="map-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>My Location</h2>
+            </div>
+            <div class="map-container">
+                <div class="map-wrapper">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.040625118123!2d130.86146997599272!3d-12.192106988023834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2b0666d1f4c6b3a7%3A0x4033654628ec6f0!2s16%20Rossiter%20St%2C%20Rapid%20Creek%20NT%200810%2C%20Australia!5e0!3m2!1sen!2sbd!4v1698765432100!5m2!1sen!2sbd" 
+                        class="map-frame" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <div class="map-overlay">
+                        <h3>Rapid Creek, NT</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> 16 Rossiter Street, Rapid Creek</p>
+                        <p><i class="fas fa-city"></i> Darwin, Northern Territory 0810</p>
+                        <p><i class="fas fa-flag"></i> Australia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">Hafizur<span>Rahman</span></div>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/hafizur-rahman-37b96226b/?profileId=ACoAAEIr0Y8BaPcLzO6lnYzJmSNl1jEvzofKtTg" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/xm.hafiz.jf" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 Hafizur Rahman. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a, .hero-buttons a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu after clicking
+                if (window.innerWidth <= 768) {
+                    document.querySelector('nav').classList.remove('active');
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '0.8rem 0';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.padding = '1.2rem 0';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.05)';
+            }
+        });
+
+        // Scroll animations
+        function checkVisibility() {
+            const elements = document.querySelectorAll('.fade-in, .timeline-item');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Image Slider Functionality
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const dotsContainer = document.querySelector('.slider-dots');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        
+        // Create dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+        
+        const dots = document.querySelectorAll('.dot');
+        
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update active dot
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            goToSlide(currentSlide);
+        }
+        
+        // Event listeners
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
+        
+        // Initial check
+        checkVisibility();
+
+        // Check on scroll
+        window.addEventListener('scroll', checkVisibility);
+    </script>
+</body>
+</html>
