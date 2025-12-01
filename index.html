@@ -317,6 +317,7 @@
         .about-text p {
             margin-bottom: 1.5rem;
             color: var(--gray);
+            line-height: 1.8;
         }
 
         .about-image {
@@ -651,36 +652,69 @@
             font-weight: 500;
         }
 
-        /* Image Slider Section */
-        .slider-section {
+        /* Advanced Image Gallery Section */
+        .gallery-section {
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
             padding: 80px 0;
         }
 
-        .slider-container {
-            max-width: 1000px;
+        .gallery-container {
+            max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .gallery-wrapper {
             position: relative;
             overflow: hidden;
-            border-radius: 15px;
+            border-radius: 20px;
             box-shadow: var(--shadow-lg);
+            background: var(--dark);
         }
 
-        .slider {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            height: 500px;
-        }
-
-        .slide {
-            min-width: 100%;
+        .gallery-main {
             position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 20px 20px 0 0;
         }
 
-        .slide img {
+        .gallery-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 1;
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 2;
+        }
+
+        .gallery-slide.prev {
+            transform: translateX(-100%);
+            opacity: 0.3;
+        }
+
+        .gallery-slide.next {
+            transform: translateX(100%);
+            opacity: 0.3;
+        }
+
+        .gallery-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 10s ease;
+        }
+
+        .gallery-slide.active img {
+            transform: scale(1.05);
         }
 
         .slide-content {
@@ -688,17 +722,32 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             color: white;
             padding: 30px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease 0.3s;
+        }
+
+        .gallery-slide.active .slide-content {
+            transform: translateY(0);
+            opacity: 1;
         }
 
         .slide-content h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
+            color: white;
         }
 
-        .slider-nav {
+        .slide-content p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        /* Gallery Navigation */
+        .gallery-nav {
             position: absolute;
             top: 50%;
             width: 100%;
@@ -709,45 +758,189 @@
             z-index: 10;
         }
 
-        .slider-btn {
-            background: rgba(255, 255, 255, 0.8);
-            border: none;
-            width: 50px;
-            height: 50px;
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: var(--transition);
-            font-size: 1.2rem;
-            color: var(--dark);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: white;
+            font-size: 1.5rem;
+            opacity: 0.7;
         }
 
-        .slider-btn:hover {
-            background: white;
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
             transform: scale(1.1);
+            opacity: 1;
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
-        .slider-dots {
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Gallery Controls */
+        .gallery-controls {
+            background: rgba(30, 41, 59, 0.9);
+            padding: 20px;
+            border-radius: 0 0 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .controls-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .thumbnails {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 5px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) rgba(255, 255, 255, 0.1);
+        }
+
+        .thumbnails::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .thumbnails::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .thumbnails::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .control-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .slide-counter {
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        /* Gallery Animation Controls */
+        .animation-controls {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
             gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
 
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--gray-light);
+        .anim-btn {
+            background: rgba(37, 99, 235, 0.1);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
 
-        .dot.active {
+        .anim-btn:hover {
             background: var(--primary);
-            transform: scale(1.2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .anim-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
         /* Reference Section */
@@ -785,10 +978,8 @@
             overflow: hidden;
         }
 
-        .reference-card .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .reference-card .avatar i {
+            font-size: 2.5rem;
         }
 
         .reference-card h3 {
@@ -847,7 +1038,7 @@
             color: white;
             font-size: 1.2rem;
             box-shadow: var(--shadow);
-            flex-shrink: 0; /* Fix for responsive email icon */
+            flex-shrink: 0;
         }
 
         .contact-details h4 {
@@ -997,6 +1188,46 @@
             }
         }
 
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+        }
+
+        @keyframes kenBurns {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -1060,7 +1291,7 @@
                 left: -10px;
             }
 
-            .slider {
+            .gallery-main {
                 height: 400px;
             }
         }
@@ -1138,7 +1369,7 @@
                 margin-top: 20px;
             }
 
-            .slider {
+            .gallery-main {
                 height: 350px;
             }
 
@@ -1150,9 +1381,29 @@
                 font-size: 1.3rem;
             }
 
-            .slider-btn {
-                width: 40px;
-                height: 40px;
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .controls-bottom {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .thumbnails {
+                order: 2;
+            }
+
+            .control-buttons {
+                order: 1;
+                justify-content: center;
+            }
+
+            .thumbnail {
+                width: 70px;
+                height: 50px;
             }
         }
 
@@ -1178,7 +1429,7 @@
                 height: 300px;
             }
 
-            .slider {
+            .gallery-main {
                 height: 300px;
             }
 
@@ -1188,6 +1439,22 @@
 
             .slide-content h3 {
                 font-size: 1.1rem;
+            }
+
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .control-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .thumbnail {
+                width: 60px;
+                height: 45px;
             }
         }
     </style>
@@ -1247,15 +1514,13 @@
             <div class="about-content">
                 <div class="about-text">
                     <h3>Motivated and dependable professional</h3>
-                    <p>I am a motivated and dependable customer service professional with proven experience across retail, car rental, and facility maintenance industries. Recognized for a strong work ethic, positive attitude, and consistent reliability in fast-paced team environments.</p>
-                    <p>I hold a valid International Driver License and all essential Australian workplace certifications. Currently pursuing a Master of Engineering at Charles Darwin University while seeking part-time/casual employment opportunities.</p>
-                    <p>Available to start immediately for part-time or casual positions. Fully flexible with shifts and own reliable transport, allowing easy travel to any work location.</p>
+                    <p>I am a motivated and dependable customer service professional with proven experience across retail, car rental, and facility maintenance industries. Recognized for a strong work ethic, positive attitude, and consistent reliability in fast-paced team environments. I hold a valid International Driver License and all essential Australian workplace certifications. Currently pursuing a Master of Engineering at Charles Darwin University while seeking part-time/casual employment opportunities. Available to start immediately for part-time or casual positions. Fully flexible with shifts and own reliable transport, allowing easy travel to any work location.</p>
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
                             <div class="contact-details">
                                 <h4>Address</h4>
-                                <p>16 Rossiter Street, Rapid Creek, NT 0810</p>
+                                <p>80 Driver Avenue, NT 0830</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1269,7 +1534,7 @@
                             <i class="fas fa-envelope"></i>
                             <div class="contact-details">
                                 <h4>Email</h4>
-                                <p>hafizurrahman.jaflong34@gmail.com / hafizur.rahman@students.cdu.edu.au</p>
+                                <p>hafizurrahman.jaflong34@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -1425,67 +1690,56 @@
         </div>
     </section>
 
-    <!-- Image Slider Section -->
-    <section id="gallery" class="slider-section">
+    <!-- Advanced Image Gallery Section -->
+    <section id="gallery" class="gallery-section">
         <div class="container">
             <div class="section-title">
                 <h2>Professional Gallery</h2>
             </div>
-            <div class="slider-container">
-                <div class="slider">
-                    <div class="slide">
-                        <img src="https://scontent.fadl7-2.fna.fbcdn.net/v/t39.30808-6/590242685_122099696427144558_8715270648339232203_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Bu6-0oEbYKkQ7kNvwGUlQ2d&_nc_oc=AdmUAnGmCTvIuYB0u7jWZEpsBU7o-c0wn12xzU1suEB-qkRy1cV5XCM3I9ariSd4Ogg&_nc_zt=23&_nc_ht=scontent.fadl7-2.fna&_nc_gid=5_U6lI5Qm9MCdmmzxEJrGg&oh=00_Afi6Lbs0JEtgH1VMne_fPp8_UofZysi1-2F3qcHGnu48ag&oe=693371B4" alt="Industrial tour at BREB in Badaghat, Sylhet, Bangladesh">
-                        <div class="slide-content">
-                            <h3>Industrial tour at BREB in Badaghat, Sylhet, Bangladesh</h3>
-                        </div>
+            
+            <div class="gallery-container">
+                <div class="gallery-wrapper">
+                    <div class="gallery-main">
+                        <!-- Gallery slides will be inserted here by JavaScript -->
                     </div>
-                    <div class="slide">
-                        <img src="https://scontent.fadl7-1.fna.fbcdn.net/v/t39.30808-6/591280598_122099696499144558_2992407546188745817_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=ugWd_V7ZCX8Q7kNvwFNiu82&_nc_oc=AdklCABGWEJcXErDF_976O-bPN_y1bf07yxYG6fkYuQAQ5FbTDxe3rNTJ3F5IhmWbnk&_nc_zt=23&_nc_ht=scontent.fadl7-1.fna&_nc_gid=tCk-A54KrIHAXXMqFXtarg&oh=00_Afgygzae52St1A7X7Axl2UUwEbLiIt1UmoIqwI7sVaEyNA&oe=69337839" alt="Industrial Technology on Electrical Engineering & Instrumentation">
-                        <div class="slide-content">
-                            <h3>Industrial Technology on Electrical Engineering & Instrumentation</h3>
-                        </div>
+                    
+                    <div class="gallery-nav">
+                        <button class="nav-btn prev-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="nav-btn next-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
                     </div>
-                    <div class="slide">
-                        <img src="https://scontent.fadl7-2.fna.fbcdn.net/v/t39.30808-6/588872167_122099696511144558_1515101784173498158_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=WUmVDvwinXcQ7kNvwEGQQkh&_nc_oc=AdmM3dCqq-MuFl2fxkk20l-J7gS_0n_jjFCsUaKXLL3AGtH0HMrwuXkjZyUWEfrfqgM&_nc_zt=23&_nc_ht=scontent.fadl7-2.fna&_nc_gid=8zp2mo_Ugm0uQ8kUUEh5Wg&oh=00_Afg_4FZl7iNaKp8eX7pAFkwAyxIC2zyFHgPKEw9C-Kv0Wg&oe=693372B4" alt="University Farewell">
-                        <div class="slide-content">
-                            <h3>University Farewell</h3>
+                    
+                    <div class="gallery-controls">
+                        <div class="progress-container">
+                            <div class="progress-bar"></div>
                         </div>
-                    </div>
-                    <div class="slide">
-                        <img src="https://scontent.fadl7-2.fna.fbcdn.net/v/t39.30808-6/591931202_122099696487144558_2083492951590833718_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=YuzZPH0kfGMQ7kNvwFU5J59&_nc_oc=AdkuD0OeXFYhg4ompoesVeqL0cj-LxLFOhRezxOoNUSRS7u3FRaIKZuPpNCi-WgSB6E&_nc_zt=23&_nc_ht=scontent.fadl7-2.fna&_nc_gid=All48cP-XNo_WzABAFCwwQ&oh=00_Afin8zk1ByB2iLS0SM-_DEB0k8cbfsb_zX44XRvF1Dt48Q&oe=69335677" alt="EEE Family">
-                        <div class="slide-content">
-                            <h3>EEE Family</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="https://scontent.fadl7-2.fna.fbcdn.net/v/t39.30808-6/592046594_122099696415144558_5336529382430048558_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=98wSf6jMuXUQ7kNvwElcVN-&_nc_oc=AdnCumjLG1zy7KHF16a6ufYEjt85R0w78uv7kyTLmFJtvFhVy_5-w5njrQuL7fO8K4U&_nc_zt=23&_nc_ht=scontent.fadl7-2.fna&_nc_gid=qmduq81zQrsTjO4kDDbZHQ&oh=00_AfgfHYLFFg8xuOWAjPDskF1Il-Dlwz3K14yXOK18ByQBoQ&oe=69337DEC" alt="Industrial Technology on Electrical Engineering & Instrumentation">
-                        <div class="slide-content">
-                            <h3>Industrial Technology on Electrical Engineering & Instrumentation</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="https://scontent.fadl7-1.fna.fbcdn.net/v/t39.30808-6/590550130_122099696547144558_7168253923002276933_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=cujYpbywxosQ7kNvwG8eddE&_nc_oc=AdlE0bZGDWy1l7vhQxeLw_WuytSQd99q4Pg5guh1JxYt5giJ2P0Ehxheo4YPDri9Ik4&_nc_zt=23&_nc_ht=scontent.fadl7-1.fna&_nc_gid=4Z41pRCvnrj2VTWQ3p9n7A&oh=00_Afhn120uPayFJtNSkBJmhWsiqnWrsRt9KRpwuAetU78jJQ&oe=69335F73" alt="SEC EEE Fest">
-                        <div class="slide-content">
-                            <h3>SEC EEE Fest</h3>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <img src="https://scontent.fadl7-1.fna.fbcdn.net/v/t39.30808-6/590432164_122099696475144558_2722893496266921924_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=2tRosnsds8wQ7kNvwFgX856&_nc_oc=AdnPIgm8z9rk8R38eLY4mnYS0O1tSbN8nbc49QgGvPr3jCb5u0k-F0tTCcy9RXvXdWo&_nc_zt=23&_nc_ht=scontent.fadl7-1.fna&_nc_gid=YHUDrHmREh1m64uOpnUXug&oh=00_AfhwdkGEERL3aLpSjnm2TBWWQkURWqt0wO4MTICRFbDf3g&oe=69335BCF" alt="SEC EEE Fest">
-                        <div class="slide-content">
-                            <h3>SEC EEE Fest</h3>
+                        
+                        <div class="controls-bottom">
+                            <div class="thumbnails">
+                                <!-- Thumbnails will be inserted here by JavaScript -->
+                            </div>
+                            
+                            <div class="control-buttons">
+                                <button class="control-btn play-pause-btn">
+                                    <i class="fas fa-pause"></i>
+                                    <span>Pause</span>
+                                </button>
+                                <div class="slide-counter">
+                                    <span class="current-slide">1</span> / <span class="total-slides">7</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="slider-nav">
-                    <button class="slider-btn prev-btn">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="slider-btn next-btn">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-                <div class="slider-dots">
-                    <!-- Dots will be generated by JavaScript -->
+                
+                <div class="animation-controls">
+                    <button class="anim-btn active" data-animation="slide">Slide</button>
+                    <button class="anim-btn" data-animation="fade">Fade</button>
+                    <button class="anim-btn" data-animation="kenburns">Ken Burns</button>
+                    <button class="anim-btn" data-animation="zoom">Zoom</button>
                 </div>
             </div>
         </div>
@@ -1500,12 +1754,21 @@
             <div class="reference-container">
                 <div class="reference-card fade-in">
                     <div class="avatar">
-                        <img src="https://media.licdn.com/dms/image/v2/D5603AQH4JRwGtqjQ8Q/profile-displayphoto-shrink_800_800/B56ZOcSbIMGoAw-/0/1733493896723?e=1764201600&v=beta&t=bWiqYpg_oTAAUtyaR0aAK1l0ZVlW__pnKeMVvL3zX_w" alt="Sifat Khan">
+                        <i class="fas fa-user-tie"></i>
                     </div>
                     <h3>Sifat Khan</h3>
                     <span class="position">Teacher, Palmerston College</span>
                     <p class="contact">Phone: +61420856291</p>
                     <p class="contact">Email: Sifat.khan@education.nt.gov.au</p>
+                </div>
+                <div class="reference-card fade-in">
+                    <div class="avatar">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Safayat Ullah</h3>
+                    <span class="position">Manager, African Restaurant, Winnellie Darwin</span>
+                    <p class="contact">Phone: +61406118815</p>
+                    <p class="contact">Email: safayatullah41@gmail.com</p>
                 </div>
             </div>
         </div>
@@ -1524,7 +1787,7 @@
                         <i class="fas fa-map-marker-alt"></i>
                         <div class="contact-details">
                             <h4>Address</h4>
-                            <p>16 Rossiter Street, Rapid Creek, NT 0810</p>
+                            <p>80 Driver Avenue, NT 0830</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -1538,7 +1801,7 @@
                         <i class="fas fa-envelope"></i>
                         <div class="contact-details">
                             <h4>Email</h4>
-                            <p>hafizurrahman.jaflong34@gmail.com / hafizur.rahman@students.cdu.edu.au</p>
+                            <p>hafizurrahman.jaflong34@gmail.com</p>
                         </div>
                     </div>
                 </div>
@@ -1561,16 +1824,16 @@
             <div class="map-container">
                 <div class="map-wrapper">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.040625118123!2d130.86146997599272!3d-12.192106988023834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2b0666d1f4c6b3a7%3A0x4033654628ec6f0!2s16%20Rossiter%20St%2C%20Rapid%20Creek%20NT%200810%2C%20Australia!5e0!3m2!1sen!2sbd!4v1698765432100!5m2!1sen!2sbd" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3898.794662241561!2d130.8927683759928!3d-12.20553138805705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2b0667a5d5a5a5a5%3A0x4033654628ec6f0!2s80%20Driver%20Ave%2C%20Winnellie%20NT%200830%2C%20Australia!5e0!3m2!1sen!2sbd!4v1698765432100!5m2!1sen!2sbd" 
                         class="map-frame" 
                         allowfullscreen="" 
                         loading="lazy" 
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                     <div class="map-overlay">
-                        <h3>Rapid Creek, NT</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> 16 Rossiter Street, Rapid Creek</p>
-                        <p><i class="fas fa-city"></i> Darwin, Northern Territory 0810</p>
+                        <h3>Winnellie, NT</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> 80 Driver Avenue, Winnellie</p>
+                        <p><i class="fas fa-city"></i> Darwin, Northern Territory 0830</p>
                         <p><i class="fas fa-flag"></i> Australia</p>
                     </div>
                 </div>
@@ -1593,6 +1856,269 @@
     </footer>
 
     <script>
+        // Gallery Data
+        const galleryImages = [
+            {
+                url: "https://scontent.fadl7-2.fna.fbcdn.net/v/t39.30808-6/590242685_122099696427144558_8715270648339232203_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Bu6-0oEbYKkQ7kNvwGUlQ2d&_nc_oc=AdmUAnGmCTvIuYB0u7jWZEpsBU7o-c0wn12xzU1suEB-qkRy1cV5XCM3I9ariSd4Ogg&_nc_zt=23&_nc_ht=scontent.fadl7-2.fna&_nc_gid=5_U6lI5Qm9MCdmmzxEJrGg&oh=00_Afi6Lbs0JEtgH1VMne_fPp8_UofZysi1-2F3qcHGnu48ag&oe=693371B4",
+                title: "Industrial tour at BREB in Badaghat, Sylhet, Bangladesh",
+                description: "Professional engineering tour and learning experience"
+            },
+            {
+                url: "https://scontent.fadl7-1.fna.fbcdn.net/v/t39.30808-6/591280598_122099696499144558_2992407546188745817_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=ugWd_V7ZCX8Q7kNvwFNiu82&_nc_oc=AdklCABGWEJcXErDF_976O-bPN_y1bf07yxYG6fkYuQAQ5FbTDxe3rNTJ3F5IhmWbnk&_nc_zt=23&_nc_ht=scontent.fadl7-1.fna&_nc_gid=tCk-A54KrIHAXXMqFXtarg&oh=00_Afgygzae52St1A7X7Axl2UUwEbLiIt1UmoIqwI7sVaEyNA&oe=69337839",
+                title: "Industrial Technology on Electrical Engineering & Instrumentation",
+                description: "Advanced technical workshop and equipment training"
+            },
+            {
+                url: "https://scontent.fadl7-2.fna.fbcdn.net/v/t39.30808-6/588872167_122099696511144558_1515101784173498158_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=WUmVDvwinXcQ7kNvwEGQQkh&_nc_oc=AdmM3dCqq-MuFl2fxkk20l-J7gS_0n_jjFCsUaKXLL3AGtH0HMrwuXkjZyUWEfrfqgM&_nc_zt=23&_nc_ht=scontent.fadl7-2.fna&_nc_gid=8zp2mo_Ugm0uQ8kUUEh5Wg&oh=00_Afg_4FZl7iNaKp8eX7pAFkwAyxIC2zyFHgPKEw9C-Kv0Wg&oe=693372B4",
+                title: "University Farewell",
+                description: "Celebrating academic achievements with peers and faculty"
+            },
+            {
+                url: "https://scontent.fadl7-2.fna.fbcdn.net/v/t39.30808-6/591931202_122099696487144558_2083492951590833718_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=YuzZPH0kfGMQ7kNvwFU5J59&_nc_oc=AdkuD0OeXFYhg4ompoesVeqL0cj-LxLFOhRezxOoNUSRS7u3FRaIKZuPpNCi-WgSB6E&_nc_zt=23&_nc_ht=scontent.fadl7-2.fna&_nc_gid=All48cP-XNo_WzABAFCwwQ&oh=00_Afin8zk1ByB2iLS0SM-_DEB0k8cbfsb_zX44XRvF1Dt48Q&oe=69335677",
+                title: "EEE Family",
+                description: "Electrical and Electronic Engineering department gathering"
+            },
+            {
+                url: "https://scontent.fadl7-2.fna.fbcdn.net/v/t39.30808-6/592046594_122099696415144558_5336529382430048558_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=98wSf6jMuXUQ7kNvwElcVN-&_nc_oc=AdnCumjLG1zy7KHF16a6ufYEjt85R0w78uv7kyTLmFJtvFhVy_5-w5njrQuL7fO8K4U&_nc_zt=23&_nc_ht=scontent.fadl7-2.fna&_nc_gid=qmduq81zQrsTjO4kDDbZHQ&oh=00_AfgfHYLFFg8xuOWAjPDskF1Il-Dlwz3K14yXOK18ByQBoQ&oe=69337DEC",
+                title: "Industrial Technology Workshop",
+                description: "Hands-on experience with electrical engineering equipment"
+            },
+            {
+                url: "https://scontent.fadl7-1.fna.fbcdn.net/v/t39.30808-6/590550130_122099696547144558_7168253923002276933_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=cujYpbywxosQ7kNvwG8eddE&_nc_oc=AdlE0bZGDWy1l7vhQxeLw_WuytSQd99q4Pg5guh1JxYt5giJ2P0Ehxheo4YPDri9Ik4&_nc_zt=23&_nc_ht=scontent.fadl7-1.fna&_nc_gid=4Z41pRCvnrj2VTWQ3p9n7A&oh=00_Afhn120uPayFJtNSkBJmhWsiqnWrsRt9KRpwuAetU78jJQ&oe=69335F73",
+                title: "SEC EEE Fest",
+                description: "Student Engineering Club event showcasing innovations"
+            },
+            {
+                url: "https://scontent.fadl7-1.fna.fbcdn.net/v/t39.30808-6/590432164_122099696475144558_2722893496266921924_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=2tRosnsds8wQ7kNvwFgX856&_nc_oc=AdnPIgm8z9rk8R38eLY4mnYS0O1tSbN8nbc49QgGvPr3jCb5u0k-F0tTCcy9RXvXdWo&_nc_zt=23&_nc_ht=scontent.fadl7-1.fna&_nc_gid=YHUDrHmREh1m64uOpnUXug&oh=00_AfhwdkGEERL3aLpSjnm2TBWWQkURWqt0wO4MTICRFbDf3g&oe=69335BCF",
+                title: "SEC EEE Fest Activities",
+                description: "Engineering competitions and technical demonstrations"
+            }
+        ];
+
+        // Gallery State
+        let currentSlide = 0;
+        let isPlaying = true;
+        let slideInterval;
+        let currentAnimation = 'slide';
+        const slideDuration = 5000; // 5 seconds per slide
+
+        // DOM Elements
+        const galleryMain = document.querySelector('.gallery-main');
+        const thumbnailsContainer = document.querySelector('.thumbnails');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const playPauseBtn = document.querySelector('.play-pause-btn');
+        const progressBar = document.querySelector('.progress-bar');
+        const currentSlideSpan = document.querySelector('.current-slide');
+        const totalSlidesSpan = document.querySelector('.total-slides');
+        const animButtons = document.querySelectorAll('.anim-btn');
+
+        // Initialize Gallery
+        function initGallery() {
+            // Create slides
+            galleryImages.forEach((image, index) => {
+                // Create main slide
+                const slide = document.createElement('div');
+                slide.className = `gallery-slide ${index === 0 ? 'active' : ''}`;
+                slide.dataset.index = index;
+                
+                slide.innerHTML = `
+                    <img src="${image.url}" alt="${image.title}" loading="lazy">
+                    <div class="slide-content">
+                        <h3>${image.title}</h3>
+                        <p>${image.description}</p>
+                    </div>
+                `;
+                
+                galleryMain.appendChild(slide);
+                
+                // Create thumbnail
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+                thumbnail.dataset.index = index;
+                
+                thumbnail.innerHTML = `<img src="${image.url}" alt="${image.title}">`;
+                thumbnail.addEventListener('click', () => goToSlide(index));
+                
+                thumbnailsContainer.appendChild(thumbnail);
+            });
+            
+            // Update counters
+            totalSlidesSpan.textContent = galleryImages.length;
+            updateCounter();
+            
+            // Start auto-play
+            startAutoPlay();
+        }
+
+        // Animation Functions
+        function applyAnimation(slideElement, animationType, isEntering = true) {
+            slideElement.style.transition = 'all 0.8s cubic-bezier(0.77, 0, 0.175, 1)';
+            
+            switch(animationType) {
+                case 'slide':
+                    slideElement.style.transform = isEntering ? 'translateX(0)' : 'translateX(-100%)';
+                    slideElement.style.opacity = isEntering ? '1' : '0';
+                    break;
+                    
+                case 'fade':
+                    slideElement.style.transform = 'translateX(0)';
+                    slideElement.style.opacity = isEntering ? '1' : '0';
+                    break;
+                    
+                case 'kenburns':
+                    slideElement.style.transform = isEntering ? 'scale(1.05)' : 'scale(1)';
+                    slideElement.style.opacity = isEntering ? '1' : '0';
+                    slideElement.querySelector('img').style.animation = isEntering ? 'kenBurns 10s ease forwards' : 'none';
+                    break;
+                    
+                case 'zoom':
+                    slideElement.style.transform = isEntering ? 'scale(1.1) translateX(0)' : 'scale(0.9) translateX(-100%)';
+                    slideElement.style.opacity = isEntering ? '1' : '0';
+                    break;
+            }
+        }
+
+        // Slide Navigation
+        function goToSlide(index) {
+            if (index < 0) index = galleryImages.length - 1;
+            if (index >= galleryImages.length) index = 0;
+            
+            const slides = document.querySelectorAll('.gallery-slide');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const prevSlide = currentSlide;
+            
+            // Update active states
+            slides[prevSlide].classList.remove('active', 'prev', 'next');
+            thumbnails[prevSlide].classList.remove('active');
+            
+            // Apply exit animation to previous slide
+            applyAnimation(slides[prevSlide], currentAnimation, false);
+            
+            // Update current slide
+            currentSlide = index;
+            
+            // Apply enter animation to new slide
+            slides[currentSlide].classList.add('active');
+            applyAnimation(slides[currentSlide], currentAnimation, true);
+            thumbnails[currentSlide].classList.add('active');
+            
+            // Update counter and progress
+            updateCounter();
+            resetProgress();
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+
+        // Auto-play Control
+        function startAutoPlay() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, slideDuration);
+            isPlaying = true;
+            updatePlayButton();
+        }
+
+        function stopAutoPlay() {
+            clearInterval(slideInterval);
+            isPlaying = false;
+            updatePlayButton();
+        }
+
+        function toggleAutoPlay() {
+            if (isPlaying) {
+                stopAutoPlay();
+            } else {
+                startAutoPlay();
+            }
+        }
+
+        function updatePlayButton() {
+            const icon = playPauseBtn.querySelector('i');
+            const text = playPauseBtn.querySelector('span');
+            
+            if (isPlaying) {
+                icon.className = 'fas fa-pause';
+                text.textContent = 'Pause';
+            } else {
+                icon.className = 'fas fa-play';
+                text.textContent = 'Play';
+            }
+        }
+
+        // Progress Bar
+        function resetProgress() {
+            progressBar.style.width = '0%';
+            progressBar.style.transition = 'none';
+            
+            setTimeout(() => {
+                progressBar.style.transition = `width ${slideDuration}ms linear`;
+                progressBar.style.width = '100%';
+            }, 10);
+        }
+
+        function updateCounter() {
+            currentSlideSpan.textContent = currentSlide + 1;
+        }
+
+        // Animation Type Control
+        function setAnimationType(type) {
+            currentAnimation = type;
+            
+            // Update active button
+            animButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.animation === type);
+            });
+            
+            // Re-apply animation to current slide
+            const currentSlideElement = document.querySelector('.gallery-slide.active');
+            applyAnimation(currentSlideElement, type, true);
+        }
+
+        // Event Listeners
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            if (isPlaying) {
+                stopAutoPlay();
+                setTimeout(startAutoPlay, 3000);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            if (isPlaying) {
+                stopAutoPlay();
+                setTimeout(startAutoPlay, 3000);
+            }
+        });
+
+        playPauseBtn.addEventListener('click', toggleAutoPlay);
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === ' ') {
+                e.preventDefault();
+                toggleAutoPlay();
+            }
+        });
+
+        // Animation buttons
+        animButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                setAnimationType(btn.dataset.animation);
+            });
+        });
+
+        // Initialize
+        initGallery();
+
         // Mobile menu toggle
         document.querySelector('.mobile-menu').addEventListener('click', function() {
             document.querySelector('nav').classList.toggle('active');
@@ -1644,54 +2170,6 @@
             });
         }
 
-        // Image Slider Functionality
-        const slider = document.querySelector('.slider');
-        const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
-        const dotsContainer = document.querySelector('.slider-dots');
-        
-        let currentSlide = 0;
-        const totalSlides = slides.length;
-        
-        // Create dots
-        slides.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (index === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(index));
-            dotsContainer.appendChild(dot);
-        });
-        
-        const dots = document.querySelectorAll('.dot');
-        
-        function goToSlide(slideIndex) {
-            currentSlide = slideIndex;
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
-            // Update active dot
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-        
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            goToSlide(currentSlide);
-        }
-        
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            goToSlide(currentSlide);
-        }
-        
-        // Event listeners
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-        
-        // Auto slide every 5 seconds
-        setInterval(nextSlide, 5000);
-        
         // Initial check
         checkVisibility();
 
